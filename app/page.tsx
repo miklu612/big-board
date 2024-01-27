@@ -4,66 +4,32 @@
 
 /*
 DB SCHEMA:
- | id      | title     | content |
-   char255   char255     text
+ name: big_board
+
+ USE posts:
+  | id      | title     | content |
+    char255   char255     int
 */
 
-const mariadb = require("mariadb");
-const pool = mariadb.createPool({
-  host: "localhost",
-  user: "bigboard",
-  password: "password123",
-  connectionLimit: 5
-});
+const {PostData, getPosts} = require("./db_connector.tsx");
+const {FunctionComponent} = require("react");
 
-class Post {
+async function BoardPost(title: string, content: string): FunctionComponent[] {
 
-  title: string = ""
-  content: string = ""
-
-  constructor(title, content) {
-    this.title = title;
-    this.content = content;
+  const post_data_list: PostData[] = await getPosts();
+  let posts: FunctionComponent[] = [];
+  
+  for(const post of post_data_list) {
+    posts.push((
+      <div>
+        <h2>{post.title}</h2>
+        <p> {post.content} </p>
+      </div>
+    ));
   }
 
-}
 
-type PostData = {title: string, content: string;}
-async function getPost(): PostData {
-
-  const ERROR_POST: PostData = {
-    title: "ERROR POST",
-    content: "This post couldn't be loaded properly"
-  };
-
-  let con = await pool.getConnection();
-  await con.query("USE big_board");
-  const rows = await con.query("SELECT * FROM posts WHERE id='0'");
-
-
-  if(rows.length === 0) {
-    return {
-      title: "Post not found",
-      content: ""
-    };
-  }
-  else {
-    return {
-      title: rows[0].title,
-      content: rows[0].content,
-    };
-  }
-
-}
-
-async function BoardPost(title: string, content: string) {
-  const post_data: PostData = await getPost();
-  return (
-    <div>
-      <h2> {post_data.title} </h2>
-      <p> {post_data.content} </p>
-    </div>
-  );
+  return posts;
 }
 
 export default function Home() {
@@ -71,6 +37,7 @@ export default function Home() {
     <main>
       <h1> Big Board </h1>
       <p> Big Board is simple bulletin board application made with Next.Js </p>
+      <a href="/post"> Create a post </a>
       {BoardPost("Hello, World!", "Hello, World. This is a test post")}
     </main>
   );
