@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <main>
       <h1> Big Board </h1>
-      <p> Big Board is simple bulletin board application made with Next.Js </p>
+      <p> Big Board is a simple message board. </p>
       <a href="/post"> Create a post </a>
       {BoardPost("Hello, World!", "Hello, World. This is a test post")}
     </main>

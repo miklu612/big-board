@@ -1,6 +1,6 @@
 
-const {createPost} = require("./../../db_connector.tsx");
-const {redirect} = require("next/navigation");
+import {createPost} from "./../../db_connector.tsx"
+import {redirect} from "next/navigation"
 
 async function sendPostData(title: string, content: string): boolean {
 

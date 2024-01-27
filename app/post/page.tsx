@@ -6,7 +6,7 @@ export default function Home(): FunctionComponent {
   return (
     <div className="post-creator-container">
       <h1> Big Board Post Page </h1>
-      <p> Big Board is simple bulletin board application made with Next.Js </p>
+      <p> Big Board is a simple message board. </p>
       <a href="/"> Back to main page </a>
       <br/> 
       <form action="/api/post_form">
