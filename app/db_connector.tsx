@@ -6,11 +6,13 @@
 // TODO: SQL-INJECTION PROOF THIS.
 // TODO: SQL-INJECTION PROOF THIS.
 
+import "dotenv/config"
+
 const mariadb = require("mariadb");
 const pool = mariadb.createPool({
   host: "localhost",
-  user: "bigboard",
-  password: "password123",
+  user: process.env.MARIADB_USER_NAME,
+  password: process.env.MARIADB_PASSWORD,
   connectionLimit: 5
 });
 
