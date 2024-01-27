@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Big Board
 
-## Getting Started
+Big Board is a simple message board project made with Next.js. It is capable of
+creating new posts and showing them to an user.
 
-First, run the development server:
+It is not advisable to run this in a public environment, since there is quite a
+lot of security issues with it and there won't be any maintaining of it.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+## Big Board Database
+
+Big Board uses MariaDB for its post storing stuff. Right now you have to
+manually create the server yourself, but in the future I will be making it so
+you can just run a script to create it.
+
+Big Board assumes that you have a Database called `big_board` with a table in
+it called `posts` that contains the following definition.
+
+```
+MariaDB [big_board]> describe posts;
++---------+-----------+------+-----+---------+-------+
+| Field   | Type      | Null | Key | Default | Extra |
++---------+-----------+------+-----+---------+-------+
+| id      | int(11)   | YES  |     | NULL    |       |
+| title   | char(255) | YES  |     | NULL    |       |
+| content | text      | YES  |     | NULL    |       |
++---------+-----------+------+-----+---------+-------+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The username must be `bigboard` and its password be `password123`. These will
+be changed in the future, but during development they will be hardcoded. This
+user must have all privilidges (cybersecurity be damned).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
