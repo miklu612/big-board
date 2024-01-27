@@ -14,19 +14,8 @@ const pool = mariadb.createPool({
   connectionLimit: 5
 });
 
-class Post {
 
-  title: string = ""
-  content: string = ""
-
-  constructor(title, content) {
-    this.title = title;
-    this.content = content;
-  }
-
-}
-
-type PostData = {title: string, content: string;}
+type PostData = {title: string, content: string, id: number};
 export async function getPosts(): PostData[] {
 
   const ERROR_POST: PostData = {
@@ -39,12 +28,9 @@ export async function getPosts(): PostData[] {
   const rows = await con.query("SELECT * FROM posts LIMIT 10");
   con.end();
 
-
-  console.log(rows);
   let posts: PostData[] = [];
 
   for(const post_data of rows) {
-    console.log(post_data);
 
     if(post_data.id === undefined) { continue; }
     if(post_data.title === undefined) { continue; }
@@ -52,7 +38,8 @@ export async function getPosts(): PostData[] {
 
     posts.push({
       title: post_data.title,
-      content: post_data.content
+      content: post_data.content,
+      id: post_data.id
     });
 
   }

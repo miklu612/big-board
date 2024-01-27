@@ -11,18 +11,23 @@ DB SCHEMA:
     char255   char255     int
 */
 
-const {PostData, getPosts} = require("./db_connector.tsx");
-const {FunctionComponent} = require("react");
+import {PostData, getPosts} from "./db_connector.tsx";
+import {FunctionComponent} from "react";
+
 
 async function BoardPost(title: string, content: string): FunctionComponent[] {
 
+  console.log(require("./globals.css"));
   const post_data_list: PostData[] = await getPosts();
   let posts: FunctionComponent[] = [];
+
   
   for(const post of post_data_list) {
     posts.push((
-      <div>
+      <div className="post-container">
+        <hr/>
         <h2>{post.title}</h2>
+        <p> Post ID: {post.id} </p>
         <p> {post.content} </p>
       </div>
     ));

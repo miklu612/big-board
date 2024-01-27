@@ -1,5 +1,6 @@
 
 const {createPost} = require("./../../db_connector.tsx");
+const {redirect} = require("next/navigation");
 
 async function sendPostData(title: string, content: string): boolean {
 
@@ -30,6 +31,6 @@ export default function handler(req, res) {
   sendPostData(req.searchParams.title, req.searchParams.content);
 
 
-  return <h1> Post created </h1>;
+  redirect("/");
 
 }
