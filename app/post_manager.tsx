@@ -7,7 +7,7 @@ export async function renderPost(post: PostData) {
       <hr/>
       <h2>{post.title}</h2>
       <p> Post ID: {post.id} </p>
-      <p> {post.content} </p>
+      <pre> {post.content} </pre>
     </div>
   );
 }

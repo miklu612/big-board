@@ -79,7 +79,7 @@ export async function getPostById(post_id: number): PostData {
   // TODO: SQL-INJECTION PROOF THIS.
   // TODO: SQL-INJECTION PROOF THIS.
   // TODO: SQL-INJECTION PROOF THIS.
-  const row = await con.query(`SELECT * FROM posts WHERE id=${post_id}`);
+  const row = await con.query(`SELECT * FROM posts WHERE id=?`, [post_id]);
 
   con.close();
 
@@ -105,7 +105,7 @@ export async function createPost(title: string, content: string): string {
   // TODO: SQL-INJECTION PROOF THIS.
   // TODO: SQL-INJECTION PROOF THIS.
   // TODO: SQL-INJECTION PROOF THIS.
-  await con.query(`INSERT INTO posts VALUES (${post_id}, '${title}', "${content}")`);
+  await con.query("INSERT INTO posts VALUES (?, ?, ?)", [post_id, title, content]);
   con.end();
 
 }
