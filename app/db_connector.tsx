@@ -16,14 +16,15 @@ const pool = mariadb.createPool({
   connectionLimit: 5
 });
 
+const ERROR_POST: PostData = {
+  title: "ERROR POST",
+  content: "This post couldn't be loaded properly",
+  id: 0
+};
 
 type PostData = {title: string, content: string, id: number};
 export async function getPosts(): PostData[] {
 
-  const ERROR_POST: PostData = {
-    title: "ERROR POST",
-    content: "This post couldn't be loaded properly"
-  };
 
   const con = await pool.getConnection();
   await con.query("USE big_board");
@@ -64,6 +65,31 @@ async function getNextId(): number {
   const max_id: int = rows[0]["Max(id)"] + 1;
 
   return max_id;
+
+}
+
+export async function getPostById(post_id: number): PostData {
+
+  const con = await pool.getConnection();
+  await con.query("USE big_board");
+
+  // TODO: SQL-INJECTION PROOF THIS.
+  // TODO: SQL-INJECTION PROOF THIS.
+  // TODO: SQL-INJECTION PROOF THIS.
+  // TODO: SQL-INJECTION PROOF THIS.
+  // TODO: SQL-INJECTION PROOF THIS.
+  // TODO: SQL-INJECTION PROOF THIS.
+  const row = await con.query(`SELECT * FROM posts WHERE id=${post_id}`);
+
+  con.close();
+
+  const post_data: PostData = {
+    id: row[0].id,
+    title: row[0].title,
+    content: row[0].content,
+  };
+
+  return post_data;
 
 }
 

@@ -13,29 +13,10 @@ DB SCHEMA:
 
 import {PostData, getPosts} from "./db_connector.tsx";
 import {FunctionComponent} from "react";
+import {getBoardPosts} from "./post_manager.tsx"
 
 
-async function getBoardPosts(): FunctionComponent[] {
 
-  console.log(require("./globals.css"));
-  const post_data_list: PostData[] = await getPosts();
-  const posts: FunctionComponent[] = [];
-
-  
-  for(const post of post_data_list) {
-    posts.push((
-      <div className="post-container">
-        <hr/>
-        <h2>{post.title}</h2>
-        <p> Post ID: {post.id} </p>
-        <p> {post.content} </p>
-      </div>
-    ));
-  }
-
-
-  return posts;
-}
 
 export default function Home() {
   return (
@@ -43,6 +24,11 @@ export default function Home() {
       <h1> Big Board </h1>
       <p> Big Board is a simple message board. </p>
       <a href="/post"> Create a post </a>
+      <br/> 
+      <form action="/get_post">
+        <input name="post_id" placeholder="Post ID" type="text"/>
+        <button type="submit"> Get Post </button>
+      </form>
       {getBoardPosts()}
     </main>
   );
