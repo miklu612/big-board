@@ -15,11 +15,11 @@ import {PostData, getPosts} from "./db_connector.tsx";
 import {FunctionComponent} from "react";
 
 
-async function BoardPost(title: string, content: string): FunctionComponent[] {
+async function getBoardPosts(): FunctionComponent[] {
 
   console.log(require("./globals.css"));
   const post_data_list: PostData[] = await getPosts();
-  let posts: FunctionComponent[] = [];
+  const posts: FunctionComponent[] = [];
 
   
   for(const post of post_data_list) {
@@ -43,7 +43,7 @@ export default function Home() {
       <h1> Big Board </h1>
       <p> Big Board is a simple message board. </p>
       <a href="/post"> Create a post </a>
-      {BoardPost("Hello, World!", "Hello, World. This is a test post")}
+      {getBoardPosts()}
     </main>
   );
 }

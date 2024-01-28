@@ -25,14 +25,14 @@ export async function getPosts(): PostData[] {
     content: "This post couldn't be loaded properly"
   };
 
-  let con = await pool.getConnection();
+  const con = await pool.getConnection();
   await con.query("USE big_board");
 
   // This sql statement was taken from https://stackoverflow.com/questions/12125904/select-last-n-rows-from-mysql/12125925#12125925
   const rows = await con.query("SELECT * FROM (SELECT * FROM posts ORDER BY id DESC LIMIT 10) AS sub ORDER BY id ASC;");
   con.end();
 
-  let posts: PostData[] = [];
+  const posts: PostData[] = [];
 
   for(const post_data of rows) {
 
