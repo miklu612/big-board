@@ -1,9 +1,10 @@
 
 import {getSpecificPost} from "./../post_manager.tsx";
+import { FunctionComponent } from "react";
 
 
 
-function ErrorPage({reason}): functionComponent {
+function ErrorPage({reason}): FunctionComponent {
   return (
     <div>
       <h1> Failed to find post</h1>
@@ -12,7 +13,7 @@ function ErrorPage({reason}): functionComponent {
   )
 }
 
-export default function page(req, res) {
+export default async function page(req, res) {
 
 
   const search_params = req.searchParams;
@@ -35,12 +36,24 @@ export default function page(req, res) {
     )
   }
 
-  return (
-    <div>
-      <h1> Big Board </h1>
-      <a href="/"> Back to main page </a>
-      {getSpecificPost(post_id)}
-    </div>
-  );
+  try {
+    const post = await getSpecificPost(post_id);
+    return (
+      <div>
+        <h1> Big Board </h1>
+        <a href="/"> Back to main page </a>
+        {post}
+      </div>
+    );
+  }
+  catch(e) {
+    return (
+      <ErrorPage
+        reason = "Couldn't get post"
+      />
+    );
+  }
+  
+
 }
 

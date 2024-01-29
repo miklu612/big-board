@@ -70,6 +70,10 @@ export async function getPostById(post_id: number): PostData {
 
   con.end();
 
+  if(row.length <= 0) {
+    throw "Couldn't find post";
+  }
+
   const post_data: PostData = {
     id: row[0].id,
     title: row[0].title,
