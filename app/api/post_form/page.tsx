@@ -1,6 +1,7 @@
 
-import {createPost} from "./../../db_connector.tsx"
-import {redirect} from "next/navigation"
+import { createPost } from "./../../db_connector.tsx"
+import { redirect } from "next/navigation"
+import { ErrorPage } from "/components/error_page.tsx"
 
 async function sendPostData(title: string, content: string): boolean {
 
@@ -12,8 +13,6 @@ async function sendPostData(title: string, content: string): boolean {
 
   createPost(title, content);
 
-
-
   return true;
 
 }
@@ -21,10 +20,20 @@ async function sendPostData(title: string, content: string): boolean {
 export default function handler(req) {
 
   if(req.searchParams.title === undefined) {
-    return <h1> Error </h1>;
+    return (
+      <ErrorPage
+        message="Could not create post"
+        reason="Post title was not provided"
+      />
+    )
   }
   else if(req.searchParams.content === undefined) {
-    return <h1> Error </h1>;
+    return (
+      <ErrorPage
+        message="Could not create post"
+        reason="Post content was not provided"
+      />
+    )
   }
 
   sendPostData(req.searchParams.title, req.searchParams.content);

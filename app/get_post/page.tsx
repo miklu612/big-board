@@ -1,17 +1,9 @@
 
-import {getSpecificPost} from "./../post_manager.tsx";
-import { FunctionComponent } from "react";
+import { getSpecificPost } from "./../post_manager.tsx";
+import { ErrorPage } from "/components/error_page.tsx";
 
 
 
-function ErrorPage({reason}): FunctionComponent {
-  return (
-    <div>
-      <h1> Failed to find post</h1>
-      <p> Reason: {reason} </p>
-    </div>
-  )
-}
 
 export default async function page(req) {
 
@@ -21,6 +13,7 @@ export default async function page(req) {
   if(search_params.post_id === undefined) {
     return (
       <ErrorPage 
+        message="Failed to find post"
         reason="Post id not defined" 
       />
     )
@@ -49,6 +42,7 @@ export default async function page(req) {
   catch(e) {
     return (
       <ErrorPage
+        message="Failed to find post"
         reason = "Couldn't get post"
       />
     );
