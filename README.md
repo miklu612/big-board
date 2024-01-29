@@ -27,7 +27,6 @@ MariaDB [big_board]> describe posts;
 +---------+-----------+------+-----+---------+-------+
 ```
 
-The username must be `bigboard` and its password be `password123`. These will
-be changed in the future, but during development they will be hardcoded. This
-user must have all privilidges (cybersecurity be damned).
+The username and password must be specified in the dotenv file. The user has to
+have all priviledges, but I will work on reducing them to the bare minimum.
 
