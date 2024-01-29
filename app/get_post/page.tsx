@@ -13,7 +13,7 @@ function ErrorPage({reason}): FunctionComponent {
   )
 }
 
-export default async function page(req, res) {
+export default async function page(req) {
 
 
   const search_params = req.searchParams;

@@ -1,6 +1,7 @@
 
 import {PostData, getPosts, getPostById} from "./db_connector.tsx";
 import Link from "next/link";
+import { FunctionComponent } from "react";
 
 export async function renderPost(post: PostData) {
 

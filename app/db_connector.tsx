@@ -9,13 +9,11 @@ const pool = mariadb.createPool({
   connectionLimit: 5
 });
 
-const ERROR_POST: PostData = {
-  title: "ERROR POST",
-  content: "This post couldn't be loaded properly",
-  id: 0
-};
-
 type PostData = {title: string, content: string, id: number};
+
+
+// This function will get the 10 most recent post and return them in a list of
+// `PostData`.
 export async function getPosts(): PostData[] {
 
 
@@ -47,6 +45,7 @@ export async function getPosts(): PostData[] {
 
 }
 
+// This function will return the next available id number
 async function getNextId(): number {
 
   const con = await pool.getConnection();
@@ -55,12 +54,14 @@ async function getNextId(): number {
   const rows = await con.query("SELECT Max(id) FROM posts");
   con.end();
 
-  const max_id: int = rows[0]["Max(id)"] + 1;
+  const max_id: number = rows[0]["Max(id)"] + 1;
 
   return max_id;
 
 }
 
+// This function will return the post identified by its id. Throws an error if
+// the post isn't found.
 export async function getPostById(post_id: number): PostData {
 
   const con = await pool.getConnection();
@@ -84,6 +85,7 @@ export async function getPostById(post_id: number): PostData {
 
 }
 
+// Creates a post and sends it to the database. 
 export async function createPost(title: string, content: string): string {
 
   const post_id: number = await getNextId();

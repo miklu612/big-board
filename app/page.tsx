@@ -1,17 +1,5 @@
 
-// TODO: Figure a way to create a db with scripts for new instances
 
-/*
-DB SCHEMA:
- name: big_board
-
- USE posts:
-  | id      | title     | content |
-    char255   char255     int
-*/
-
-import {PostData, getPosts} from "./db_connector.tsx";
-import {FunctionComponent} from "react";
 import {getBoardPosts} from "./post_manager.tsx";
 import "./globals.css";
 
