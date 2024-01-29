@@ -68,7 +68,7 @@ export async function getPostById(post_id: number): PostData {
 
   const row = await con.query(`SELECT * FROM posts WHERE id=?`, [post_id]);
 
-  con.close();
+  con.end();
 
   const post_data: PostData = {
     id: row[0].id,
