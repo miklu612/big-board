@@ -19,7 +19,6 @@ async function sendPostData(title: string, content: string): boolean {
 }
 
 export default function handler(req, res) {
-  //console.log(req.searchParams);
 
   if(req.searchParams.title === undefined) {
     return <h1> Error </h1>;
