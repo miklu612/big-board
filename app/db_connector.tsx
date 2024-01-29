@@ -1,11 +1,4 @@
 
-// TODO: SQL-INJECTION PROOF THIS.
-// TODO: SQL-INJECTION PROOF THIS.
-// TODO: SQL-INJECTION PROOF THIS.
-// TODO: SQL-INJECTION PROOF THIS.
-// TODO: SQL-INJECTION PROOF THIS.
-// TODO: SQL-INJECTION PROOF THIS.
-
 import "dotenv/config"
 
 const mariadb = require("mariadb");
@@ -73,12 +66,6 @@ export async function getPostById(post_id: number): PostData {
   const con = await pool.getConnection();
   await con.query("USE big_board");
 
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
   const row = await con.query(`SELECT * FROM posts WHERE id=?`, [post_id]);
 
   con.close();
@@ -99,12 +86,6 @@ export async function createPost(title: string, content: string): string {
   const con = await pool.getConnection();
   await con.query("USE big_board");
 
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
-  // TODO: SQL-INJECTION PROOF THIS.
   await con.query("INSERT INTO posts VALUES (?, ?, ?)", [post_id, title, content]);
   con.end();
 
